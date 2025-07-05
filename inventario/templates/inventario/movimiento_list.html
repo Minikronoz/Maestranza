@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Movimientos de Inventario{% endblock %}
+{% block content %}
+{% load user_tags %}
+
+<h1>Movimientos de Inventario</h1>
+{% if user.groups.all|length > 0 %}
+    {% if user|has_group:"Administrador" or user|has_group:"Gestor de Inventario" or user|has_group:"Encargado de Logística" %}
+        <a href="{% url 'movimiento-nuevo' %}" class="btn btn-primary mb-3">Registrar Movimiento</a>
+    {% endif %}
+{% endif %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Producto</th>
+            <th>Tipo</th>
+            <th>Cantidad</th>
+            <th>Proyecto</th>
+            <th>Usuario</th>
+            <th>Observaciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for movimiento in movimientos %}
+        <tr>
+            <td>{{ movimiento.fecha|date:"d/m/Y H:i" }}</td>
+            <td>{{ movimiento.producto.nombre }}</td>
+            <td>{{ movimiento.get_tipo_movimiento_display }}</td>
+            <td>{{ movimiento.cantidad }}</td>
+            <td>{{ movimiento.proyecto|default:"-" }}</td>
+            <td>{{ movimiento.usuario.username|default:"-" }}</td>
+            <td>{{ movimiento.observaciones|default:"-" }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7" class="text-center">No hay movimientos registrados.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

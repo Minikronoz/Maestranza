@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">Maestranza</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+{% load user_tags %}
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <!--Menú izquierdo -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if user.is_authenticated %}
+            {% if user|has_group:"Administrador" %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'producto-list' %}">Inventario</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/">Admin</a></li>
+            {% endif %}
+
+            {% if user|has_group:"Administrador" or user|has_group:"Gestor de Inventario" or user|has_group:"Encargado de Logística" %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'movimiento-list' %}">Movimientos</a></li>
+            {% endif %}
+
+            {% if user|has_group:"Gestor de Inventario" %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'producto-list' %}">Mis Productos</a></li>
+            {% endif %}
+
+            {% if user|has_group:"Administrador" or user|has_group:"Gestor de Inventario" or user|has_group:"Encargado de Logística" %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'alerta-stock-bajo' %}">Alertas Stock Bajo</a></li>
+            {% endif %}
+            {% if user|has_group:"Administrador" or user|has_group:"Gestor de Inventario" or user|has_group:"Encargado de Logística" %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'productos-vencimiento' %}">Productos Próximos a Vencer</a></li>
+            {% endif %}
+            {% if user|has_group:"Comprador" %}
+                <li class="nav-item"><a class="nav-link" href="#">Órdenes de compra</a></li>
+            {% endif %}
+
+            {% if user|has_group:"Usuario Final" %}
+                <li class="nav-item"><a class="nav-link" href="#">Solicitar materiales</a></li>
+            {% endif %}
+        {% endif %}
+      </ul>
+
+      <!--Acciones de usuario (derecha)-->
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+              <span class="navbar-text text-white me-2">Hola, {{ user.username }}</span>
+            </li>
+            <li class="nav-item">
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button class="btn btn-link nav-link text-warning" type="submit" style="padding: 0;">Cerrar sesión</button>
+              </form>
+            </li>
+        {% else %}
+            <li class="nav-item"><a class="nav-link text-success" href="{% url 'login' %}">Iniciar sesión</a></li>
+            <li class="nav-item"><a class="nav-link text-info" href="{% url 'register' %}">Registrarse</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

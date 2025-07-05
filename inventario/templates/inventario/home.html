@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load user_tags %}
+
+{% block title %}Inicio - Maestranza{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+      <h1>Bienvenido al Sistema de Control de Inventarios</h1>
+      <p>Este sistema fue desarrollado para optimizar la gestión de materiales y componentes en Maestranzas Unidos S.A.</p>
+
+      {% if not user.is_authenticated %}
+          <a href="{% url 'login' %}" class="btn btn-primary">Iniciar sesión</a>
+          <a href="{% url 'register' %}" class="btn btn-outline-secondary ms-2">Registrarse</a>
+      {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Productos con Fecha de Vencimiento Próxima{% endblock %}
+
+{% block content %}
+<h1>Productos con Vencimiento Próximo o Vencido</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Fecha Vencimiento</th>
+            <th>Cantidad</th>
+            <th>Ubicación</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for producto in productos_vencimiento %}
+            <tr {% if producto.fecha_vencimiento < today %} class="table-danger" {% endif %}>
+                <td>{{ producto.codigo }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.descripcion|default:"-" }}</td>
+                <td>{{ producto.fecha_vencimiento|date:"d/m/Y" }}</td>
+                <td>{{ producto.cantidad }}</td>
+                <td>{{ producto.ubicacion }}</td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="6" class="text-center">No hay productos próximos a vencer.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

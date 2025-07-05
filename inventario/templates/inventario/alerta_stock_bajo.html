@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Alertas de Stock Bajo{% endblock %}
+{% block content %}
+<h1>Alertas de Stock Bajo</h1>
+
+{% if productos_alerta %}
+    <table class="table table-striped table-bordered align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Umbral Mínimo</th>
+                <th>Ubicación</th>
+                <th>Fecha Vencimiento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos_alerta %}
+            <tr class="table-danger">
+                <td>{{ producto.codigo }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.cantidad }}</td>
+                <td>{{ producto.umbral_stock_bajo }}</td>
+                <td>{{ producto.ubicacion }}</td>
+                <td>
+                    {% if producto.fecha_vencimiento %}
+                        {{ producto.fecha_vencimiento|date:"d/m/Y" }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'producto-editar' producto.pk %}" class="btn btn-primary btn-sm">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div class="alert alert-success">No hay productos con stock bajo.</div>
+{% endif %}
+
+{% endblock %}
