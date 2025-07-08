@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load user_tags %}
+{% load static %}
 
 {% block title %}Inicio - Maestranza{% endblock %}
 
@@ -7,7 +8,16 @@
   <div class="container mt-5">
       <h1>Bienvenido al Sistema de Control de Inventarios</h1>
       <p>Este sistema fue desarrollado para optimizar la gestión de materiales y componentes en Maestranzas Unidos S.A.</p>
+      
+      <h1>Nosotros</h1>
+      <p>En Maestranzas Unidos S.A., somos una empresa dedicada a ofrecer soluciones integrales en fabricación, mantenimiento y mecanizado de piezas industriales. Contamos con años de experiencia en el rubro, un equipo técnico altamente capacitado y maquinaria de última generación que nos permite atender con precisión y eficiencia los requerimientos de nuestros clientes.
 
+Nos especializamos en la elaboración de componentes metálicos, reparación de estructuras, soldaduras especializadas y desarrollo de proyectos a medida para sectores como la minería, construcción, agricultura, forestal y manufactura en general.
+
+Nuestro compromiso es brindar un servicio de calidad, seguro y puntual, respaldado por un enfoque centrado en la mejora continua, la atención personalizada y el cumplimiento riguroso de los estándares técnicos.
+
+En Maestranzas Unidos S.A., transformamos ideas en soluciones concretas y duraderas.</p>
+            
       {% if not user.is_authenticated %}
           <a href="{% url 'login' %}" class="btn btn-primary">Iniciar sesión</a>
           <a href="{% url 'register' %}" class="btn btn-outline-secondary ms-2">Registrarse</a>
