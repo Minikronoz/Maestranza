@@ -5,22 +5,85 @@
 {% block title %}Inicio - Maestranza{% endblock %}
 
 {% block content %}
+  <style>
+#carouselMaestranza .carousel-inner {
+  top: 50px;
+  height: 600px;       
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+#carouselMaestranza .carousel-item img {
+  max-height: 100%;  
+  max-width: 100%;   
+  object-fit: contain; 
+  margin: 0 auto;
+}
+  </style>
+
+
+
+
+
+
+
   <div class="container mt-5">
-      <h1>Bienvenido al Sistema de Control de Inventarios</h1>
-      <p>Este sistema fue desarrollado para optimizar la gestión de materiales y componentes en Maestranzas Unidos S.A.</p>
-      
-      <h1>Nosotros</h1>
-      <p>En Maestranzas Unidos S.A., somos una empresa dedicada a ofrecer soluciones integrales en fabricación, mantenimiento y mecanizado de piezas industriales. Contamos con años de experiencia en el rubro, un equipo técnico altamente capacitado y maquinaria de última generación que nos permite atender con precisión y eficiencia los requerimientos de nuestros clientes.
+    <h1 class="mb-4">Bienvenido al Sistema de Control de Inventarios</h1>
+    <p>Este sistema fue desarrollado para optimizar la gestión de materiales y componentes en Maestranzas Unidos S.A.</p>
 
-Nos especializamos en la elaboración de componentes metálicos, reparación de estructuras, soldaduras especializadas y desarrollo de proyectos a medida para sectores como la minería, construcción, agricultura, forestal y manufactura en general.
 
-Nuestro compromiso es brindar un servicio de calidad, seguro y puntual, respaldado por un enfoque centrado en la mejora continua, la atención personalizada y el cumplimiento riguroso de los estándares técnicos.
 
-En Maestranzas Unidos S.A., transformamos ideas en soluciones concretas y duraderas.</p>
-            
-      {% if not user.is_authenticated %}
-          <a href="{% url 'login' %}" class="btn btn-primary">Iniciar sesión</a>
-          <a href="{% url 'register' %}" class="btn btn-outline-secondary ms-2">Registrarse</a>
-      {% endif %}
+    <div id="carouselMaestranza" class="carousel slide my-4" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselMaestranza" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselMaestranza" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselMaestranza" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner rounded shadow">
+    <div class="carousel-item active">
+      <img src="{% static 'inventario/img/maestranza.png' %}" class="d-block w-100" alt="Imagen 1">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'inventario/img/maestranza2.png' %}" class="d-block w-100" alt="Imagen 2">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'inventario/img/maestranza3.png' %}" class="d-block w-100" alt="Imagen 3">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselMaestranza" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselMaestranza" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Siguiente</span>
+  </button>
+</div>
+
+
+
+
+
+    <h2 class="mt-5">Nosotros</h2>
+    <p>
+      En Maestranzas Unidos S.A., somos una empresa dedicada a ofrecer soluciones integrales en fabricación, mantenimiento y mecanizado de piezas industriales.
+      Contamos con años de experiencia en el rubro, un equipo técnico altamente capacitado y maquinaria de última generación que nos permite atender con precisión
+      y eficiencia los requerimientos de nuestros clientes.
+    </p>
+    <p>
+      Nos especializamos en la elaboración de componentes metálicos, reparación de estructuras, soldaduras especializadas y desarrollo de proyectos a medida
+      para sectores como la minería, construcción, agricultura, forestal y manufactura en general.
+    </p>
+    <p>
+      Nuestro compromiso es brindar un servicio de calidad, seguro y puntual, respaldado por un enfoque centrado en la mejora continua, la atención personalizada
+      y el cumplimiento riguroso de los estándares técnicos.
+    </p>
+    <p>
+      En Maestranzas Unidos S.A., transformamos ideas en soluciones concretas y duraderas.
+    </p>
+
+
+
   </div>
 {% endblock %}
